@@ -84,6 +84,39 @@ namespace DanHuntUMLShapesAssignment.Tests
                 Assert.That(sut.CalculatePerimeter(), Is.EqualTo(rectangleToCopy.CalculatePerimeter()));
             }
             #endregion
+            #region Circle
+            [Test]
+            public void CircleDefaultConstructor()
+            {
+                var sut = new Circle();
+
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(2 * Math.PI * _defaultSize));
+                Assert.That(sut.CalculateArea(), Is.EqualTo(Math.PI * Math.Pow(_defaultSize, 2)));
+            }
+
+            [Test]
+            public void CircleParameterizedConstructor()
+            {
+                var radius = 10;
+                sut = new Circle(radius);
+
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(2 * Math.PI * radius));
+                Assert.That(sut.CalculateArea(), Is.EqualTo(Math.PI * Math.Pow(radius, 2)));
+            }
+
+            [Test]
+            public void CircleCopyConstructor()
+            {
+                var radius = 5;
+                var circleToCopy = new Circle(radius);
+
+                sut = new Circle(circleToCopy);
+
+                Assert.That(sut.CalculateArea(), Is.EqualTo(circleToCopy.CalculateArea()));
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(circleToCopy.CalculatePerimeter()));
+            }
+            #endregion
+
         }
     }
 }

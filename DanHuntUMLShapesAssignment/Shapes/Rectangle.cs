@@ -4,10 +4,8 @@ using System.Text;
 
 namespace DanHuntUMLShapesAssignment.Shapes
 {
-    internal class Rectangle : Square
+    internal class Rectangle : AbstractShape
     {
-        //Inheriting from Square cause all rectangles are squares. In theory this is good for future use right?
-
         private double Width;
 
         private double Height;

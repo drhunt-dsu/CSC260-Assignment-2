@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DanHuntUMLShapesAssignment.Shapes;
 
 namespace DanHuntUMLShapesAssignment
 {
-    internal class Square : AbstractShape
+    internal class Square : Rectangle
     {
+        //Inheriting from Rectangle since all squares are rectangle. In theory this is good for future use right?
+
         private double LengthOfSide;
         private const string KEY_SIDE = "side";
 
