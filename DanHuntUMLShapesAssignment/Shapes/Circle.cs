@@ -25,9 +25,9 @@ namespace DanHuntUMLShapesAssignment
         }
 
         //Copy Constructor
-        public Circle(Circle circle)
+        public Circle(Circle circleToCopy)
         {
-            Parameters = new Dictionary<string, double> {{ KEY_RADIUS, circle.Radius }};
+            Parameters = new Dictionary<string, double> {{ KEY_RADIUS, circleToCopy.Radius }};
             Initialize();
         }
 

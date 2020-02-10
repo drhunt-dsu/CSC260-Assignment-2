@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using DanHuntUMLShapesAssignment.Shapes;
 using NUnit.Framework;
 
@@ -115,6 +114,48 @@ namespace DanHuntUMLShapesAssignment.Tests
                 Assert.That(sut.CalculateArea(), Is.EqualTo(circleToCopy.CalculateArea()));
                 Assert.That(sut.CalculatePerimeter(), Is.EqualTo(circleToCopy.CalculatePerimeter()));
             }
+            #endregion
+            #region Ellipse
+            [Test]
+            public void EllipseDefaultConstructor()
+            {
+                var sut = new Ellipse();
+
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(2 * Math.PI * 
+                                                                      Math.Sqrt(
+                                                                          (Math.Pow(_defaultSize, 2) + Math.Pow(_defaultSize, 2)) / 2)));
+                Assert.That(sut.CalculateArea(), Is.EqualTo(Math.PI * _defaultSize * _defaultSize));
+            }
+
+            [Test]
+            public void EllipseParameterizedConstructor()
+            {
+                var semiMajorAxis = 10;
+                var semiMinorAxis = 20;
+                sut = new Ellipse(semiMajorAxis, semiMinorAxis);
+
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(2 * Math.PI *
+                                                                 Math.Sqrt(
+                                                                     (Math.Pow(semiMajorAxis, 2) + Math.Pow(semiMinorAxis, 2)) / 2)));
+                Assert.That(sut.CalculateArea(), Is.EqualTo(Math.PI * semiMajorAxis * semiMinorAxis));
+            }
+
+            [Test]
+            public void EllipseCopyConstructor()
+            {
+                var semiMajorAxis = 5;
+                var semiMinorAxis = 15;
+                var EllipseToCopy = new Ellipse(semiMajorAxis, semiMinorAxis);
+
+                sut = new Ellipse(EllipseToCopy);
+
+                Assert.That(sut.CalculateArea(), Is.EqualTo(EllipseToCopy.CalculateArea()));
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(EllipseToCopy.CalculatePerimeter()));
+            }
+            #endregion
+            #region Pentagon
+
+
             #endregion
 
         }

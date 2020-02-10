@@ -27,9 +27,9 @@ namespace DanHuntUMLShapesAssignment
         }
 
         //Copy Constructor
-        public Square(Square square)
+        public Square(Square squareToCopy)
         {
-            Parameters = new Dictionary<string, double> {{ KEY_SIDE, square.LengthOfSide }};
+            Parameters = new Dictionary<string, double> {{ KEY_SIDE, squareToCopy.LengthOfSide }};
             Initialize();
         }
 

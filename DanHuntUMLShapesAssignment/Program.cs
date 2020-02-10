@@ -3,6 +3,7 @@
 //CSC260 Assignment 2 - Shapes from UML Diagram
 
 using System;
+using System.Net;
 using DanHuntUMLShapesAssignment.Shapes;
 
 namespace DanHuntUMLShapesAssignment
@@ -13,11 +14,14 @@ namespace DanHuntUMLShapesAssignment
         private static int _rectangleWidth = 10;
         private static int _rectangleHeight = 7;
         private static int _circleRadius = 3;
+        private static int _elipseSemiMajorAxis = 13;
+        private static int _elipseSemiMinorAxis = 8;
 
         private static AbstractShape[] _shapes;
         private static Square _square;
         private static Rectangle _rectangle;
         private static Circle _circle;
+        private static Ellipse _ellipse;
 
         static void Main(string[] args)
         {
@@ -33,8 +37,9 @@ namespace DanHuntUMLShapesAssignment
             _square = new Square(_squareSideLength);
             _rectangle = new Rectangle(_rectangleWidth, _rectangleHeight);
             _circle = new Circle(_circleRadius);
+            _ellipse = new Ellipse(_elipseSemiMajorAxis, _elipseSemiMinorAxis);
 
-            _shapes = new AbstractShape[] {_square, _rectangle,_circle };
+            _shapes = new AbstractShape[] {_square, _rectangle,_circle, _ellipse };
         }
 
         /// <summary>
@@ -54,7 +59,7 @@ namespace DanHuntUMLShapesAssignment
         /// <param name="shape"></param>
         private static void OutputAreaAndPerimeter(AbstractShape shape)
         {
-            var asteriskString = new string('*', (35-shape.Name.Length)/2); // I hate using magic numbers but not finding a great way to get this number dynamically
+            var asteriskString = new string('*', (38-shape.Name.Length)/2); // I hate using magic numbers but not finding a great way to get this number dynamically
             Console.WriteLine($"{asteriskString}{shape.Name}{asteriskString}");
             Console.WriteLine($"Area:\t{Math.Round(shape.CalculateArea(), 2)}\tPerimeter:\t{Math.Round(shape.CalculatePerimeter(),2)}");
         }
