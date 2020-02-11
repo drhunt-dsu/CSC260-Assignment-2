@@ -18,7 +18,7 @@ namespace DanHuntUMLShapesAssignment
         private static int _elipseSemiMinorAxis = 8;
         private static int _pentagonSideLength = 23;
 
-        private static AbstractShape[] _shapes;
+        private static AbstractShape[] _parameterizedShapesArray;
         private static Square _square;
         private static Rectangle _rectangle;
         private static Circle _circle;
@@ -28,11 +28,13 @@ namespace DanHuntUMLShapesAssignment
         static void Main(string[] args)
         {
             InitializeShapes();
-            OutputAllShapeInfo();
+            OutputShapes(GetDefaultShapes(), "Default");
+            OutputShapes(_parameterizedShapesArray, "Parameterized");
+            OutputShapes(GetCopyShapes(), "Copy");
         }
 
         /// <summary>
-        /// Initialize all shape objects and the shapes array
+        /// Initialize all parameterized shape objects
         /// </summary>
         private static void InitializeShapes()
         {
@@ -42,18 +44,53 @@ namespace DanHuntUMLShapesAssignment
             _ellipse = new Ellipse(_elipseSemiMajorAxis, _elipseSemiMinorAxis);
             _pentagon = new Pentagon(_pentagonSideLength);
 
-            _shapes = new AbstractShape[] {_square, _rectangle,_circle, _ellipse, _pentagon};
+            _parameterizedShapesArray = new AbstractShape[] { _square, _rectangle, _circle, _ellipse, _pentagon };
         }
 
         /// <summary>
         /// Writes area & perimeters for all shapes
         /// </summary>
-        private static void OutputAllShapeInfo()
+        private static void OutputShapes(AbstractShape[] shapes, string name)
         {
-            foreach (var shape in _shapes)
+            Console.WriteLine(); //just add a line break
+            OutputBoderLine('=', name);
+            foreach (var shape in _parameterizedShapesArray)
             {
                 OutputAreaAndPerimeter(shape);
             }
+        }
+
+        /// <summary>
+        /// Get an array of AbstractShapes with copy constructors
+        /// Requires parameterized array to be initialized first
+        /// </summary>
+        /// <returns></returns>
+        private static AbstractShape[] GetCopyShapes()
+        {
+            return new AbstractShape[]
+            {
+                new Square(_square),
+                new Rectangle(_rectangle),
+                new Circle(_circle),
+                new Ellipse(_ellipse),
+                new Pentagon(_pentagon)
+            };
+        }
+
+        /// <summary>
+        /// Get an array of AbstractShapes with default constructors
+        /// </summary>
+        /// <returns></returns>
+        private static AbstractShape[] GetDefaultShapes()
+        {
+            return new AbstractShape[]
+            {
+                new Square(),
+                new Rectangle(),
+                new Circle(),
+                new Ellipse(),
+                new Pentagon()
+            };
         }
 
         /// <summary>
@@ -62,9 +99,22 @@ namespace DanHuntUMLShapesAssignment
         /// <param name="shape"></param>
         private static void OutputAreaAndPerimeter(AbstractShape shape)
         {
-            var asteriskString = new string('*', (38-shape.Name.Length)/2); // I hate using magic numbers but not finding a great way to get this number dynamically
-            Console.WriteLine($"{asteriskString}{shape.Name}{asteriskString}");
-            Console.WriteLine($"Area:\t{Math.Round(shape.CalculateArea(), 2)}\tPerimeter:\t{Math.Round(shape.CalculatePerimeter(),2)}");
+            OutputBoderLine('*', shape.Name);
+            var roundedPerimeter = Math.Round(shape.CalculatePerimeter(), 2);
+            var roundedArea = Math.Round(shape.CalculateArea(), 2);
+            Console.WriteLine($"Area:\t{roundedArea}\tPerimeter:\t{roundedPerimeter}");
+        }
+
+
+        /// <summary>
+        /// Outputs a fixed length border string for use between shapes or sections
+        /// </summary>
+        /// <param name="boderChar">repeated character that makes up the border</param>
+        /// <param name="name">Name to be displayed in the center of the border</param>
+        private static void OutputBoderLine(char boderChar, string name)
+        {
+            var borderString = new string(boderChar, (38-name.Length)/2);
+            Console.WriteLine($"{borderString}{name}{borderString}");
         }
     }
 }
