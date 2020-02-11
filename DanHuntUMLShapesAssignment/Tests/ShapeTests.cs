@@ -154,10 +154,47 @@ namespace DanHuntUMLShapesAssignment.Tests
             }
             #endregion
             #region Pentagon
+            [Test]
+            public void PentagonDefaultConstructor()
+            {
+                sut = new Pentagon();
 
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(_defaultSize * 5));
+                Assert.That(sut.CalculateArea(), Is.EqualTo(GetExpectedAreaForPentagon(_defaultSize)));
+            }
 
+            [Test]
+            public void PentagonParameterizedConstructor()
+            {
+                var len = 10;
+
+                sut = new Pentagon(len);
+
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(len * 5));
+                Assert.That(sut.CalculateArea(), Is.EqualTo(GetExpectedAreaForPentagon(len)));
+            }
+
+            [Test]
+            public void PentagonCopyConstructor()
+            {
+                var len = 15;
+                var PentagonToCopy = new Pentagon(len);
+
+                sut = new Pentagon(PentagonToCopy);
+
+                Assert.That(sut.CalculateArea(), Is.EqualTo(PentagonToCopy.CalculateArea()));
+                Assert.That(sut.CalculatePerimeter(), Is.EqualTo(PentagonToCopy.CalculatePerimeter()));
+            }
+
+            private double GetExpectedAreaForPentagon(double side)
+            {
+                //Checked against calculator at https://www.google.com/search?q=pentagon+area
+                var innerRoot = 5 * (5 + 2 * Math.Sqrt(5));
+                return 0.25 * Math.Sqrt(innerRoot) * Math.Pow(side, 2);
+
+                //in retrospect 17.2a^2 probably would have been good enough since I round the output but I already wrote the formula so whatever 
+            }
             #endregion
-
         }
     }
 }
